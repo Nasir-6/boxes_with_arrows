@@ -2,61 +2,47 @@ import { useEffect } from "react";
 import "./App.css";
 
 function App() {
+
+  useEffect(() => {
+    const data = fetch()
+
+  },[])
   const drawArrow = () => {
+    // take in start and end and make it grab those - this is an event listener so possibly can pass in divs as parameters 
+    // ? But does it update the position!
     let divStart = document.querySelector("#start");
     let divEnd = document.querySelector("#end");
+
+
 
     let arrow = document.querySelector("#arrow");
     console.log("divStart", divStart);
     console.log("divStart.offsetWidth", divStart.offsetWidth);
 
-    let posnStartTop = {
+    let posnStartBottom = {
+      x: divEnd.offsetLeft + divEnd.offsetWidth / 2,
+      y: divEnd.offsetTop + divEnd.offsetHeight,
+      
+    };
+
+    let posnEndTop = {
       x: divStart.offsetLeft + divStart.offsetWidth / 2,
       y: divStart.offsetTop,
     };
 
-    let posnEndBottom = {
-      x: divEnd.offsetLeft + divEnd.offsetWidth / 2,
-      y: divEnd.offsetTop + divEnd.offsetHeight,
-    };
 
-    var dArr =
-      "M" +
-      posnStartTop.x +
-      "," +
-      posnStartTop.y +
-      " " +
-      "Q" +
-      posnStartTop.x +
-      "," +
-      (posnStartTop.y - 10) +
-      " " +
-      posnEndBottom.x +
-      "," +
-      (posnEndBottom.y + 10) +
-      " " +
-      posnEndBottom.x +
-      "," +
-      posnEndBottom.y;
 
     // No space between letters and next coordinates
     // But always space after y coordinat so Mx1,y1 x2,y2 x3,y3 x4,y4 So on!!
-    var dArrNew = `M${posnStartTop.x},${posnStartTop.y} Q${posnStartTop.x},${
-      posnStartTop.y - 10
-    } ${posnEndBottom.x},${posnEndBottom.y + 10} ${posnEndBottom.x},${
-      posnEndBottom.y
-    }`;
 
-    let newPath = `M${posnStartTop.x},${posnStartTop.y} Q${posnStartTop.x},${
-      (posnStartTop.y + posnEndBottom.y) / 2
-    } ${(posnStartTop.x + posnEndBottom.x) / 2},${
-      (posnStartTop.y + posnEndBottom.y) / 2
-    } Q${posnEndBottom.x},${(posnStartTop.y + posnEndBottom.y) / 2} ${
-      posnEndBottom.x
-    },${posnEndBottom.y + (posnStartTop.y - posnEndBottom.y)* 0.15}`;
+    let newPath = `M${posnStartBottom.x},${posnStartBottom.y} Q${posnStartBottom.x},${
+      (posnStartBottom.y + posnEndTop.y) / 2
+    } ${(posnStartBottom.x + posnEndTop.x) / 2},${
+      (posnStartBottom.y + posnEndTop.y) / 2
+    } Q${posnEndTop.x},${(posnStartBottom.y + posnEndTop.y) / 2} ${
+      posnEndTop.x
+    },${posnEndTop.y + (posnStartBottom.y - posnEndTop.y)* 0.15}`;
 
-    console.log("dArr", dArr);
-    console.log("dArrNew", dArrNew);
     console.log("newPath", newPath);
     arrow.setAttribute("d", newPath);
   };
