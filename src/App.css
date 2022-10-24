@@ -22,21 +22,20 @@
   align-items: center;
   justify-content: center;
   max-width: 50%;
-  /* min-height: 0; */
 }
 
+
+/* solve issue with grid items overflowing  */
+/* https://datacadamia.com/web/css/grid/overflow */
 .preReq > *{
   min-width: 0px;
 }
 
-h2{
-  width: 100%;
-  padding: 1rem;
-}
 
 .learningObj-card{
   background-color: rgba(255, 255, 255, 0.3);
-  width: 80%;
+  width: 90%;
+  height: fit-content;
   padding: 1rem;
   border-radius: 1rem;
   margin: 0rem auto;
@@ -65,7 +64,7 @@ h2{
   transition: 1s;
 }
 
-p{
+.preReq-card > p, .nextSteps-card > p{
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -76,7 +75,7 @@ svg{
   top: 0;
   left: 0;
   z-index: -1;
-  background-color: grey;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .preReq-card:hover, .nextSteps-card:hover{
