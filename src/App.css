@@ -16,11 +16,17 @@
   height: 90vh;
   border: 1px solid black;
   text-align: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
   position: relative;
   align-items: center;
-  gap: 3rem;
+  justify-content: center;
+  max-width: 50%;
+  /* min-height: 0; */
+}
+
+.preReq > *{
+  min-width: 0px;
 }
 
 h2{
@@ -33,31 +39,30 @@ h2{
   width: 80%;
   padding: 1rem;
   border-radius: 1rem;
-  margin: 1rem;
-  
+  margin: 0rem auto;
 }
 
-.preReqCards{
+.preReqCards, .nextStepsCards{
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0 1rem;
+  /* margin-bottom: 3rem; */
+  
 }
 
-.preReq-card {
+.preReq-card, .nextSteps-card {
   text-align: center;
-  padding: 10px;
-  /* position: relative; */
-  /* width: 100px;
-  max-width: 100px; */
+  /* padding: 10px; */
+  padding: 0.5rem 1rem;
   max-height: 100px;
   border-radius: 1rem;
-  /* left: 100px; */
-  background-color: aqua;
+  background-color: white;
   flex: 1;
-  transition: 1s;
   overflow: hidden;
-  /* white-space: nowrap; */
+  box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%);
+  height: 56px;
+  transition: 1s;
 }
 
 p{
@@ -74,9 +79,16 @@ svg{
   background-color: grey;
 }
 
-.preReq-card:hover{
-  flex:15;
+.preReq-card:hover, .nextSteps-card:hover{
+  flex-grow:20;
   /* overflow: visible; */
-  max-height: 200px;
+  max-height: 400px;
   transition: 0.5s;
+
+  height: fit-content;
+  max-height: 200px;
+}
+
+.preReq-card:hover > p, .nextSteps-card:hover > p{
+  white-space: pre-wrap;
 }

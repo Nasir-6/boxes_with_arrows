@@ -11,20 +11,19 @@ function App() {
   // });
 
 
-  const drawArrowFunction = (startId, endId) => {
+  const drawArrowFunction = (startId, endId, arrowId) => {
     // take in start and end and make it grab those - this is an event listener so possibly can pass in divs as parameters 
     // ? But does it update the position! - YES IT DOES - as long as when the initial is created it is set!
-    console.log("Testing new arrow function")
-    let divStart = document.getElementById(`divStart-${startId}`);
-    let divEnd = document.getElementById("end");
-
-
-    let newArrow = <path id={`arrow-${1}`} />
-    console.log('newArrow', newArrow)
-    let arrow = document.getElementById(`arrow-${startId}`);
-    console.log("divStart", divStart);
-    console.log("divStart.offsetWidth", divStart.offsetWidth);
-
+    // console.log("Testing new arrow function")
+    // console.log('startId', startId)
+    // console.log('endId', endId)
+    // console.log('arrowId', arrowId)
+    let divStart = document.getElementById(startId);
+    let divEnd = document.getElementById(endId);
+    let arrow = document.getElementById(arrowId);
+    // console.log('divStart', divStart)
+    // console.log('divEnd', divEnd)
+    // console.log('arrow', arrow)
     let posnStartBottom = {
       x: divStart.offsetLeft + divStart.offsetWidth / 2,
       y: divStart.offsetTop + divStart.offsetHeight
@@ -44,38 +43,63 @@ function App() {
       (posnStartBottom.y + posnEndTop.y) / 2
     } Q${posnEndTop.x},${(posnStartBottom.y + posnEndTop.y) / 2} ${
       posnEndTop.x
-    },${posnEndTop.y + (posnStartBottom.y - posnEndTop.y)* 0.125}`;
+    },${posnEndTop.y -10}`;     // Adjust here to get arrows down straight - don't give a percentage value - otherwise varies when resizing 
 
-    // console.log("newPath", newPath);
+
     arrow.setAttribute("d", newPath);
   };
 
   const preReqArr = [1,2,3,4,5,6]
   const preReqCards = preReqArr.map((id) => {
-    return <div className="preReq-card" id={`divStart-${id}`}>
-      <p className="preReq-text">{`Card ${id} - lorem ajnsfdk aoksjdas kosajdklaj`}</p>
+    return <div className="preReq-card" id={`preReq-card-${id}`}>
+      <p className="preReq-text">{`Card ${id} - lorem ajnsfdk aoksjdas kosajdklaj ashdjashd oasdo asjdoas koasjdokasjd oijasdokjas d asojd oasjdoiasjd ojjksadjkashdjkhasd sjdhaskhd kajshd kj ashkjd haskd ashkjdh askdhaskjdh `}</p>
       <button>KS1</button>
       </div>
   })
 
   const preReqArrows = preReqArr.map((id) => {
-    // console.log('Making arrows')
-    // drawArrowFunction(id);
-    return <path id={`arrow-${id}`} markerEnd="url(#arrowhead)" />
+    return <path id={`preReq-arrow-${id}`} markerEnd="url(#arrowhead)" />
+  })
+
+
+
+  const nextStepsArr = [1,2,3,4,5,6]
+  const nextStepsCards = nextStepsArr.map((id) => {
+    return <div className="nextSteps-card" id={`nextSteps-card-${id}`}>
+      <p className="nextSteps-text">{`Card ${id} - lorem ajnsfdk aoksjdas kosajdklaj ashdjashd oasdo asjdoas koasjdokasjd oijasdokjas d asojd oasjdoiasjd ojjksadjkashdjkhasd sjdhaskhd kajshd kj ashkjd haskd ashkjdh askdhaskjdh `}</p>
+      <button>KS1</button>
+      </div>
+  })
+
+  const nextStepsArrows = nextStepsArr.map((id) => {
+    return <path id={`nextSteps-arrow-${id}`} markerEnd="url(#arrowhead)" />
   })
 
   // console.log('preReqArrows', preReqArrows)
   useEffect(()=>{
     preReqArr.forEach((id) => {
-      let divStart = document.getElementById(`divStart-${id}`)
-      let arrow = document.getElementById(`arrow-${id}`)
-      console.log('divStart', divStart)
-      console.log('arrow', arrow)
-      drawArrowFunction(id)
-      new ResizeObserver(() => drawArrowFunction(id)).observe(divStart)
+
+      let preReqCard = document.getElementById(`preReq-card-${id}`)
+      const startId = `preReq-card-${id}`
+      const endId = `learningObj`
+      const arrowId = `preReq-arrow-${id}`
+      drawArrowFunction(startId, endId, arrowId)
+      new ResizeObserver(() => drawArrowFunction(startId, endId, arrowId)).observe(preReqCard)
+    })
+
+    nextStepsArr.forEach((id) => {
+      let nextStepsCard = document.getElementById(`nextSteps-card-${id}`)
+      const startId = `learningObj`
+      const endId = `nextSteps-card-${id}`
+      const arrowId = `nextSteps-arrow-${id}`
+      drawArrowFunction(startId, endId, arrowId)
+      new ResizeObserver(() => drawArrowFunction(startId, endId, arrowId)).observe(nextStepsCard)
     })
 
   },[])
+
+  
+
 
 
 
@@ -87,25 +111,21 @@ function App() {
           <h2>Icicle</h2>
         </div>
         <div className="preReq">
-          <h2>Pre Requisites</h2>
 
           <div className="preReqCards">
-            {/* Insert a mapped version of the cards here */}
             {preReqCards}
-            {/* <div id="start" className="preReq-card">
-              Card 1 END
-            </div> */}
           </div>
 
-          <div id="end" className="learningObj-card">
+          <div id="learningObj" className="learningObj-card">
             <p>
               This is a long learning objective, Lorem ipsum dolor sit amet
               consectetur adipisicing elit. Explicabo earum recusandae.
             </p>
+            <button>GCSE</button>
           </div>
 
-          <div className="preReqCards">
-            <div className="preReq-card">Card 4 START</div>
+          <div className="nextStepsCards">
+            {nextStepsCards}
           </div>
           <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
             <defs>
@@ -128,6 +148,7 @@ function App() {
               markerEnd="url(#arrowhead)"
             >
               {preReqArrows}
+              {nextStepsArrows}
               <path id="arrow" />
             </g>
           </svg>
