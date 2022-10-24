@@ -40,18 +40,30 @@ h2{
 .preReqCards{
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0 1rem;
 }
 
 .preReq-card {
   text-align: center;
   padding: 10px;
   /* position: relative; */
-  width: 100px;
+  /* width: 100px;
+  max-width: 100px; */
+  max-height: 100px;
   border-radius: 1rem;
   /* left: 100px; */
   background-color: aqua;
   flex: 1;
-  transition: 0.15s;
+  transition: 1s;
+  overflow: hidden;
+  /* white-space: nowrap; */
+}
+
+p{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 svg{
@@ -60,9 +72,11 @@ svg{
   left: 0;
   z-index: -1;
   background-color: grey;
-  transition: 1s;
 }
 
 .preReq-card:hover{
-  flex:4;
+  flex:15;
+  /* overflow: visible; */
+  max-height: 200px;
+  transition: 0.5s;
 }

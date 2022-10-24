@@ -2,62 +2,6 @@ import { useEffect } from "react";
 import "./App.css";
 
 function App() {
-
-  // const drawArrow = () => {
-  //   // take in start and end and make it grab those - this is an event listener so possibly can pass in divs as parameters 
-  //   // ? But does it update the position! - YES IT DOES - as long as when the initial is created it is set!
-  //   let divStart = document.getElementById("start");
-  //   let divEnd = document.getElementById("end");
-
-
-
-  //   let arrow = document.getElementById("arrow");
-  //   console.log("divStart", divStart);
-  //   console.log("divStart.offsetWidth", divStart.offsetWidth);
-
-  //   let posnStartBottom = {
-  //     x: divEnd.offsetLeft + divEnd.offsetWidth / 2,
-  //     y: divEnd.offsetTop + divEnd.offsetHeight,
-      
-  //   };
-
-  //   let posnEndTop = {
-  //     x: divStart.offsetLeft + divStart.offsetWidth / 2,
-  //     y: divStart.offsetTop,
-  //   };
-
-  //   // No space between letters and next coordinates
-  //   // But always space after y coordinat so Mx1,y1 x2,y2 x3,y3 x4,y4 So on!!
-  //   let newPath = `M${posnStartBottom.x},${posnStartBottom.y} Q${posnStartBottom.x},${
-  //     (posnStartBottom.y + posnEndTop.y) / 2
-  //   } ${(posnStartBottom.x + posnEndTop.x) / 2},${
-  //     (posnStartBottom.y + posnEndTop.y) / 2
-  //   } Q${posnEndTop.x},${(posnStartBottom.y + posnEndTop.y) / 2} ${
-  //     posnEndTop.x
-  //   },${posnEndTop.y + (posnStartBottom.y - posnEndTop.y)* 0.125}`;
-
-  //   // console.log("newPath", newPath);
-  //   arrow.setAttribute("d", newPath);
-  // };
-
-  // useEffect(() => {
-  //   let divEnd = document.querySelector("#end");
-  //   divEnd.addEventListener("webkitTransitionEnd", (event) => {
-  //     console.log("Webkit transition end");
-  //     drawArrow();
-  //     // setTimeout(() => {drawArrow()}, 150)
-  //     // drawArrow()
-  //   });
-
-  //   divEnd.addEventListener("transitionend", (event) => {
-  //     console.log("Normal transitionEnd");
-  //     drawArrow();
-  //     // setTimeout(() => {drawArrow()}, 150)
-  //     // drawArrow()
-  //   });
-  //   drawArrow();
-  // }, []);
-
   // let resize;
   // window.addEventListener("resize", function () {
   //   // clearTimeout(resize);
@@ -108,7 +52,10 @@ function App() {
 
   const preReqArr = [1,2,3,4,5,6]
   const preReqCards = preReqArr.map((id) => {
-    return <div className="preReq-card" id={`divStart-${id}`}>{`Card ${id}`}</div>
+    return <div className="preReq-card" id={`divStart-${id}`}>
+      <p className="preReq-text">{`Card ${id} - lorem ajnsfdk aoksjdas kosajdklaj`}</p>
+      <button>KS1</button>
+      </div>
   })
 
   const preReqArrows = preReqArr.map((id) => {
@@ -125,23 +72,7 @@ function App() {
       console.log('divStart', divStart)
       console.log('arrow', arrow)
       drawArrowFunction(id)
-
-
       new ResizeObserver(() => drawArrowFunction(id)).observe(divStart)
-    // divStart.addEventListener("webkitTransitionEnd", (event) => {
-    //   console.log("Webkit transition end");
-    //   drawArrowFunction(id);
-    //   // setTimeout(() => {drawArrow()}, 150)
-    //   // drawArrow()
-    // });
-
-    // divStart.addEventListener("transitionend", (event) => {
-    //   console.log("Normal transitionEnd");
-    //   drawArrowFunction(id);
-    //   // setTimeout(() => {drawArrow()}, 150)
-    //   // drawArrow()
-    // });
-
     })
 
   },[])
